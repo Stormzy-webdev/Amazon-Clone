@@ -180,6 +180,45 @@ button:hover,
   font-weight: 700;
 }
 
+.sub-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #232f3e;
+  padding: 0.45rem 0.9rem;
+  scrollbar-width: thin;
+}
+
+.sub-nav-btn {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.sub-nav-btn:hover {
+  border-color: #fff;
+}
+
+.all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.burger-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 main {
   width: min(1200px, 92%);
   margin: 1.3rem auto 3rem;
@@ -448,6 +487,10 @@ main {
   .category-grid,
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sub-nav {
+    padding: 0.4rem 0.6rem;
   }
 }
 
