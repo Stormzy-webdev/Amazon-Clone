@@ -85,10 +85,12 @@ const themeToggle = document.getElementById('themeToggle');
 const shopNowBtn = document.getElementById('shopNowBtn');
 const menuBtn = document.getElementById('menuBtn');
 const navMiddle = document.getElementById('navMiddle');
+const cartToast = document.getElementById('cartToast');
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let searchTerm = '';
 let selectedCategory = 'All';
+let toastTimeoutId;
 const randFormatter = new Intl.NumberFormat('en-ZA', {
   style: 'currency',
   currency: 'ZAR'
@@ -173,18 +175,31 @@ function renderProducts() {
   });
 }
 
+function showCartToast(message) {
+  cartToast.textContent = message;
+  cartToast.classList.add('show');
+
+  clearTimeout(toastTimeoutId);
+  toastTimeoutId = setTimeout(() => {
+    cartToast.classList.remove('show');
+  }, 1400);
+}
+
 function addToCart(productId) {
   const existingItem = cart.find((item) => item.id === productId);
+  const product = products.find((item) => item.id === productId);
 
   if (existingItem) {
     existingItem.qty += 1;
   } else {
-    const product = products.find((item) => item.id === productId);
     cart.push({ ...product, qty: 1 });
   }
 
   saveCart();
   renderCart();
+  if (product) {
+    showCartToast(`${product.title} added to cart`);
+  }
 }
 
 function removeFromCart(productId) {
