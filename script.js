@@ -87,6 +87,10 @@ const navMiddle = document.getElementById('navMiddle');
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let searchTerm = '';
+const randFormatter = new Intl.NumberFormat('en-ZA', {
+  style: 'currency',
+  currency: 'ZAR'
+});
 
 function saveCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -159,7 +163,7 @@ function renderProducts() {
       <h3>${product.title}</h3>
       <p>${product.category}</p>
       <div class="meta">
-        <span class="price">$${product.price.toFixed(2)}</span>
+        <span class="price">${randFormatter.format(product.price)}</span>
         <span class="rating">Rating ${product.rating}</span>
       </div>
       <button data-id="${product.id}">Add to Cart</button>
@@ -209,7 +213,7 @@ function renderCart() {
       <h4>${item.title}</h4>
       <div class="item-row">
         <p>Qty: ${item.qty}</p>
-        <p>$${(item.price * item.qty).toFixed(2)}</p>
+        <p>${randFormatter.format(item.price * item.qty)}</p>
       </div>
       <button data-remove-id="${item.id}">Remove</button>
     `;
@@ -217,7 +221,7 @@ function renderCart() {
   });
 
   cartCount.textContent = totalItems;
-  subtotal.textContent = `$${totalAmount.toFixed(2)}`;
+  subtotal.textContent = randFormatter.format(totalAmount);
 }
 
 function toggleCart(isOpen) {

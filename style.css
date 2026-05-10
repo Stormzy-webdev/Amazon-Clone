@@ -68,6 +68,28 @@ body.dark {
   display: none;
 }
 
+button,
+.search-wrap button,
+.hero button,
+.product-card button,
+.cart-item button,
+.checkout-btn,
+.danger-btn {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+button:hover,
+.search-wrap button:hover,
+.hero button:hover,
+.product-card button:hover,
+.cart-item button:hover,
+.checkout-btn:hover,
+.danger-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+  filter: brightness(1.03);
+}
+
 .nav-middle {
   display: grid;
   gap: 0.6rem;
@@ -164,7 +186,9 @@ main {
 }
 
 .hero {
-  background: linear-gradient(130deg, #fed7aa, #fde68a);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.08)),
+    url("https://m.media-amazon.com/images/I/71SRLXG7lbL._SX3000_.jpg") center 0%/cover no-repeat;
   border-radius: 18px;
   min-height: 280px;
   display: grid;
@@ -180,7 +204,7 @@ main {
 
 .hero p {
   margin: 0;
-  color: #7c2d12;
+  color: #fef3c7;
   font-weight: 600;
 }
 
