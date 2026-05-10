@@ -5,7 +5,7 @@ const products = [
     category: 'Electronics',
     price: 89.99,
     rating: 4.6,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/headphones.jpg'
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const products = [
     category: 'Electronics',
     price: 129.99,
     rating: 4.3,
-    image: 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/smartwatch.jpg'
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const products = [
     category: 'Fashion',
     price: 34.99,
     rating: 4.2,
-    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/hoodie.jpg'
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const products = [
     category: 'Fashion',
     price: 59.99,
     rating: 4.5,
-    image: 'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/backpack.jpg'
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const products = [
     category: 'Home',
     price: 42.5,
     rating: 4.1,
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/lamp.jpg'
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const products = [
     category: 'Home',
     price: 78,
     rating: 4.4,
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/cookware.jpg'
   },
   {
     id: 7,
@@ -53,7 +53,7 @@ const products = [
     category: 'Books',
     price: 15.99,
     rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80'
+    image: 'resources/atomic habits.jpg'
   },
   {
     id: 8,
