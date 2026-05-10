@@ -76,10 +76,11 @@ const overlay = document.getElementById('overlay');
 const cartItems = document.getElementById('cartItems');
 const subtotal = document.getElementById('subtotal');
 const clearCartBtn = document.getElementById('clearCartBtn');
-const categoryFilter = document.getElementById('categoryFilter');
-const sortSelect = document.getElementById('sortSelect');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
+const filterBtn = document.getElementById('filterBtn');
+const filterMenu = document.getElementById('filterMenu');
+const filterDropdown = document.getElementById('filterDropdown');
 const themeToggle = document.getElementById('themeToggle');
 const shopNowBtn = document.getElementById('shopNowBtn');
 const menuBtn = document.getElementById('menuBtn');
@@ -87,6 +88,7 @@ const navMiddle = document.getElementById('navMiddle');
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let searchTerm = '';
+let selectedCategory = 'All';
 const randFormatter = new Intl.NumberFormat('en-ZA', {
   style: 'currency',
   currency: 'ZAR'
@@ -108,21 +110,27 @@ function renderCategories() {
     card.className = 'category-card';
     card.innerHTML = `<h3>${category}</h3><p>Explore top ${category.toLowerCase()} picks</p>`;
     categoryGrid.appendChild(card);
+  });
+}
 
-    const option = document.createElement('option');
-    option.value = category;
+function renderFilterMenu() {
+  const categories = ['All', ...getCategories()];
+  filterMenu.innerHTML = '';
+
+  categories.forEach((category) => {
+    const option = document.createElement('button');
+    option.type = 'button';
+    option.className = 'filter-option';
     option.textContent = category;
-    categoryFilter.appendChild(option);
+    option.dataset.category = category;
+    filterMenu.appendChild(option);
   });
 }
 
 function getFilteredProducts() {
-  const selectedCategory = categoryFilter.value;
-  const sortValue = sortSelect.value;
-
   let list = [...products];
 
-  if (selectedCategory !== 'all') {
+  if (selectedCategory !== 'All') {
     list = list.filter((product) => product.category === selectedCategory);
   }
 
@@ -130,14 +138,6 @@ function getFilteredProducts() {
     list = list.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }
-
-  if (sortValue === 'price-low') {
-    list.sort((a, b) => a.price - b.price);
-  } else if (sortValue === 'price-high') {
-    list.sort((a, b) => b.price - a.price);
-  } else if (sortValue === 'rating-high') {
-    list.sort((a, b) => b.rating - a.rating);
   }
 
   return list;
@@ -259,8 +259,30 @@ clearCartBtn.addEventListener('click', () => {
   renderCart();
 });
 
-categoryFilter.addEventListener('change', renderProducts);
-sortSelect.addEventListener('change', renderProducts);
+filterBtn.addEventListener('click', () => {
+  const isOpen = filterMenu.classList.toggle('open');
+  filterBtn.setAttribute('aria-expanded', String(isOpen));
+});
+
+filterMenu.addEventListener('click', (event) => {
+  const chosenCategory = event.target.dataset.category;
+  if (!chosenCategory) {
+    return;
+  }
+
+  selectedCategory = chosenCategory;
+  filterBtn.textContent = chosenCategory;
+  filterMenu.classList.remove('open');
+  filterBtn.setAttribute('aria-expanded', 'false');
+  renderProducts();
+});
+
+document.addEventListener('click', (event) => {
+  if (!filterDropdown.contains(event.target)) {
+    filterMenu.classList.remove('open');
+    filterBtn.setAttribute('aria-expanded', 'false');
+  }
+});
 
 searchBtn.addEventListener('click', () => {
   searchTerm = searchInput.value;
@@ -289,6 +311,7 @@ menuBtn.addEventListener('click', () => {
 });
 
 renderCategories();
+renderFilterMenu();
 renderProducts();
 renderCart();
 applyTheme();
